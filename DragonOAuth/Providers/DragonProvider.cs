@@ -19,11 +19,13 @@ namespace DragonOAuth.Providers
         {
             string connectionString = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-            User _user = new User(); //await Task.Run(() => iUser.find_User(context.UserName, context.Password)); FIND USER
-
+            User _user = await Task.Run(() => {
+                //FIND USER
+                return new User { UserId = 1 };
+            });
+          
             if (_user.UserId > 0)
             {
-
                 var identity = new ClaimsIdentity("JWT");
 
                 identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
